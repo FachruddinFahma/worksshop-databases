@@ -32,3 +32,24 @@ SELECT dosen.nama_dosen, jurusan.nama_jur,
     -> WHERE mata_kuliah.nip = dosen.nip
     -> AND mata_kuliah.kode_jur = jurusan.kode_jur
     -> GROUP BY dosen.nama_dosen, jurusan.nama_jur;
+
+-- Menampilkan nama dosen, nama jurusan, jumlah total sks dari masing-masing
+-- dosen pada setiap jurusan
+SELECT dosen.nama_dosen, jurusan.nama_jur,
+    -> SUM(mata_kuliah.sks) AS jml_sks
+    -> FROM mata_kuliah, dosen, jurusan
+    -> WHERE mata_kuliah.nip = dosen.nip
+    -> AND mata_kuliah.kode_jur = jurusan.kode_jur
+    -> GROUP BY dosen.nama_dosen, jurusan.nama_jur;
+
+-- Menampilkan nama dosen, nama jurusan, jumlah total sks dari masing-masing
+-- dosen pada setiap jurusan. Dimana akan menampilkan jumlah total sks antara
+-- 5 dan 12, serta diurutkan dari jumlah sks paling banyak.
+SELECT dosen.nama_dosen, jurusan.nama_jur,
+    -> SUM(mata_kuliah.sks) AS jml_sks
+    -> FROM mata_kuliah, dosen, jurusan
+    -> WHERE mata_kuliah.nip = dosen.nip
+    -> AND mata_kuliah.kode_jur = jurusan.kode_jur
+    -> GROUP BY dosen.nama_dosen, jurusan.nama_jur
+    -> HAVING jml_sks BETWEEN 5 AND 12
+    -> ORDER BY jml_sks DESC;
