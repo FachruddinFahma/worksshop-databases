@@ -73,4 +73,15 @@ SELECT krs.kode_krs, krs.tanggal_krs,
     -> ON krs.kode_krs = detail_krs.kode_krs
     -> JOIN mata_kuliah
     -> ON krs.kode_jur = mata_kuliah.kode_jur
-    -> ORDER BY detail_krs.hari ASC;
+    -> ORDER BY detail_krs.hari ASC;]
+    
+-- Menampilkan nim, nama mahasiswa, kode krs, jumlah hari
+-- dari masingmasing mahasiswa dan urutkan berdasarkan kode krs dari yang paling awal.
+    SELECT mhs.nim, mhs.nama_mhs,
+    -> krs.kode_krs, COUNT(detail_krs.hari) AS jml_hari
+    -> FROM krs JOIN mhs
+    -> ON krs.nim = mhs.nim
+    -> JOIN detail_krs
+    -> ON krs.kode_krs = detail_krs.kode_krs
+    -> GROUP BY mhs.nim
+    -> ORDER BY krs.kode_krs ASC;
